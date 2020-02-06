@@ -8,9 +8,15 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	// initialise game objects
 	texture.loadFromFile("gfx/Mushroom.png");
 
-	testSprite.setTexture(&texture);
-	testSprite.setSize(sf::Vector2f(100, 100));
-	testSprite.setPosition(100, 100);
+	playerObject.setInput(in);
+	playerObject.setTexture(&texture);
+	playerObject.setSize(sf::Vector2f(100, 100));
+	playerObject.setPosition(100, 100);
+
+	texture2.loadFromFile("gfx/Goomba.png");
+	goomba.setTexture(&texture2);
+	goomba.setSize(sf::Vector2f(100, 100));
+	goomba.setPosition(200, 250);
 
 }
 
@@ -28,6 +34,8 @@ void Level::handleInput(float dt)
 		window->close();
 	}
 
+	playerObject.Player::handleInput(dt);
+
 }
 
 // Update game objects
@@ -41,7 +49,8 @@ void Level::render()
 {
 	beginDraw();
 
-	window->draw(testSprite);
+	window->draw(playerObject);
+	window->draw(goomba);
 
 	endDraw();
 }
